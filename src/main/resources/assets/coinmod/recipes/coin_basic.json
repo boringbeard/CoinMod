@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "aa",
+    "aa"
+  ],
+  "key":
+  {
+    "a":
+    {
+      "type": "forge:ore_dict",
+      "ore": "nuggetGold"
+    }
+  },
+  "result":
+  {
+    "item": "coinmod:coin_basic",
+    "count": 1,
+    "data": 0
+  }
+}

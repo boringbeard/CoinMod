@@ -1,0 +1,300 @@
+{
+	"credit": "Made with Blockbench",
+
+	"textures": {
+		"0": "coinmod:coin_back",
+		"1": "coinmod:coin_front",
+		"particle": "coinmod:coin_front"
+	},
+	"elements": [
+		{
+			"from": [2, 6, 7.5],
+			"to": [14, 10, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [2, 6, 14, 10], "texture": "#0"},
+				"east": {"uv": [13, 6, 14, 10], "texture": "#0"},
+				"south": {"uv": [2, 6, 14, 10], "texture": "#1"},
+				"west": {"uv": [13, 6, 14, 10], "texture": "#0"},
+				"up": {"uv": [6, 13, 7, 14], "texture": "#0"},
+				"down": {"uv": [13, 6, 14, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 4, 7.5],
+			"to": [13, 6, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [3, 10, 13, 12], "texture": "#0"},
+				"east": {"uv": [12, 4, 13, 6], "texture": "#0"},
+				"south": {"uv": [3, 10, 13, 12], "texture": "#1"},
+				"west": {"uv": [12, 4, 13, 6], "texture": "#0"},
+				"up": {"uv": [0, 0, 10, 1], "texture": "#missing"},
+				"down": {"uv": [13, 6, 14, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 12, 7.5],
+			"to": [12, 13, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [4, 3, 12, 4], "texture": "#0"},
+				"east": {"uv": [12, 4, 13, 5], "texture": "#0"},
+				"south": {"uv": [4, 3, 12, 4], "texture": "#1"},
+				"west": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"up": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"down": {"uv": [0, 0, 8, 1], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [6, 13, 7.5],
+			"to": [10, 14, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [6, 2, 10, 3], "texture": "#0"},
+				"east": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"south": {"uv": [6, 2, 10, 3], "texture": "#1"},
+				"west": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"up": {"uv": [6, 13, 10, 14], "texture": "#0"},
+				"down": {"uv": [0, 0, 4, 1], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [6, 2, 7.5],
+			"to": [10, 3, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [6, 13, 10, 14], "texture": "#0"},
+				"east": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"south": {"uv": [6, 13, 10, 14], "texture": "#1"},
+				"west": {"uv": [12, 4, 13, 5], "texture": "#0"},
+				"up": {"uv": [0, 0, 4, 1], "texture": "#missing"},
+				"down": {"uv": [13, 6, 14, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [3, 10, 7.5],
+			"to": [13, 12, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [3, 4, 13, 6], "texture": "#0"},
+				"east": {"uv": [12, 4, 13, 6], "texture": "#0"},
+				"south": {"uv": [3, 4, 13, 6], "texture": "#1"},
+				"west": {"uv": [13, 6, 14, 8], "texture": "#0"},
+				"up": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"down": {"uv": [0, 0, 10, 1], "texture": "#missing"}
+			}
+		},
+		{
+			"from": [4, 3, 7.5],
+			"to": [12, 4, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 6, 0.5]},
+			"faces": {
+				"north": {"uv": [4, 12, 12, 13], "texture": "#0"},
+				"east": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"south": {"uv": [4, 12, 12, 13], "texture": "#1"},
+				"west": {"uv": [13, 6, 14, 7], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 1], "texture": "#missing"},
+				"down": {"uv": [13, 6, 14, 7], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2.75, 1],
+			"scale": [0.5, 0.55, 0.55]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 2.75, 1],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"translation": [2, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"translation": [2, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"translation": [0, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"head": {
+			"translation": [0, 1.75, -6.75]
+		},
+		"fixed": {
+			"rotation": [0, -180, 0],
+			"translation": [0, 0, -0.25],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	},
+	"groups": [
+		{
+			"name": "group",
+			"origin": [0, 0, 0],
+			"children": [0, 1, 2, 3, 4, 5, 6]
+		}
+	],
+	"overrides": [
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.05,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_1"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.10,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_2"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.15,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_3"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.21,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_4"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.26,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_5"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.31,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_6"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.36,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_7"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.42,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_8"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.47,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_9"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.52,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_10"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.57,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_9"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.63,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_8"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.68,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_7"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.73,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_6"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.78,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_5"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.84,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_4"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.89,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_3"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 0.94,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_2"
+		},
+		{
+			"predicate": {
+				"coinmod:donefraction": 1,
+				"coinmod:inHand": 1
+			},
+			"model": "coinmod:item/coin_basic_1"
+		},
+        {
+            "predicate": {
+              "coinmod:side": 1
+            },
+            "model": "coinmod:item/coin_basic"
+        },
+		{
+			"predicate": {
+				"coinmod:side": 2
+			},
+			"model": "coinmod:item/coin_basic_back"
+		},
+		{
+			"predicate": {
+				"coinmod:side": 1,
+				"coinmod:donefraction": 2
+			},
+			"model": "coinmod:item/coin_basic"
+		},
+		{
+			"predicate": {
+				"coinmod:side": 2,
+				"coinmod:donefraction": 2
+			},
+			"model": "coinmod:item/coin_basic_back"
+		}
+	]
+}

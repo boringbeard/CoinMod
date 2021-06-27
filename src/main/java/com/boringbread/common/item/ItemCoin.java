@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,7 +20,7 @@ import static com.boringbread.common.CreativeTabCoinMod.creativeTabCoinMod;
 
 public class ItemCoin extends Item
 {
-    public static ItemCoin coin = new ItemCoin();
+    public static final ItemCoin INSTANCE = new ItemCoin();
 
     private static final String NAME = "coin_basic";
     private static final int SUCCESS_RATE = 50;
@@ -133,14 +132,13 @@ public class ItemCoin extends Item
 
     public static void preInitCommon()
     {
-        ForgeRegistries.ITEMS.register(coin);
     }
 
     public static void preInitClient()
     {
         ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("coinmod:coin_basic", "inventory");
         final int DEFAULT_ITEM_SUBTYPE = 0;
-        ModelLoader.setCustomModelResourceLocation(coin, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+        ModelLoader.setCustomModelResourceLocation(INSTANCE, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
     }
 
     public boolean isAnimating(EntityLivingBase entityIn, ItemStack stack)

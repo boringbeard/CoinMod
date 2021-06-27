@@ -5,8 +5,6 @@
   "description": "It adds coins.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
   "authorList": ["boringbread"],
   "credits": "Everyone",
   "logoFile": "coinmod:textures/coin_front.png",

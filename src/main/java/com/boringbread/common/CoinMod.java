@@ -28,7 +28,8 @@ public class CoinMod {
     public static CommonProxy proxy;
 
     @EventHandler
-    public static void preInit(FMLPreInitializationEvent event){
+    public static void preInit(FMLPreInitializationEvent event)
+    {
         logger = event.getModLog();
         proxy.preInit();
     }

@@ -8,10 +8,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
-public abstract class CommonProxy {
+public class CommonProxy {
     public void preInit() {
         CreativeTabCoinMod.preInitCommon();
-        ItemCoin.preInitCommon();
     }
 
     public void init()

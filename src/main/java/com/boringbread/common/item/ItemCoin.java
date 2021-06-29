@@ -130,15 +130,10 @@ public class ItemCoin extends Item
         return FLIPPING_DURATION;
     }
 
-    public static void preInitCommon()
-    {
-    }
-
-    public static void preInitClient()
+    public static void initModel()
     {
         ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("coinmod:coin_basic", "inventory");
-        final int DEFAULT_ITEM_SUBTYPE = 0;
-        ModelLoader.setCustomModelResourceLocation(INSTANCE, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
+        ModelLoader.setCustomModelResourceLocation(INSTANCE, 0, itemModelResourceLocation);
     }
 
     public boolean isAnimating(EntityLivingBase entityIn, ItemStack stack)

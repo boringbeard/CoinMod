@@ -1,6 +1,6 @@
-package com.boringbread.common;
+package com.boringbread.creativetab;
 
-import com.boringbread.common.item.ItemCoin;
+import com.boringbread.item.ItemCoin;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;

@@ -1,4 +1,4 @@
-package com.boringbread.common;
+package com.boringbread.util;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

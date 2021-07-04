@@ -1,6 +1,7 @@
-package com.boringbread.common;
+package com.boringbread.init;
 
-import com.boringbread.common.item.ItemCoin;
+import com.boringbread.item.ItemCoin;
+import com.boringbread.creativetab.CreativeTabCoinMod;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;

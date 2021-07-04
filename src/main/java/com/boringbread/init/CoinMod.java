@@ -1,4 +1,4 @@
-package com.boringbread.common;
+package com.boringbread.init;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -24,7 +24,7 @@ public class CoinMod {
 
     public static Logger logger;
 
-    @SidedProxy(clientSide = "com.boringbread.client.ClientProxy", serverSide = "com.boringbread.common.DedicatedServerProxy")
+    @SidedProxy(clientSide = "com.boringbread.client.ClientProxy", serverSide = "com.boringbread.init.DedicatedServerProxy")
     public static CommonProxy proxy;
 
     @EventHandler

@@ -1,7 +1,7 @@
 package com.boringbread.client;
 
-import com.boringbread.common.CommonProxy;
-import com.boringbread.common.item.ItemCoin;
+import com.boringbread.init.CommonProxy;
+import com.boringbread.item.ItemCoin;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

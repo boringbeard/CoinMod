@@ -1,7 +1,7 @@
 package com.boringbread.client;
 
-import com.boringbread.common.Utils;
-import com.boringbread.common.item.ItemCoin;
+import com.boringbread.util.Utils;
+import com.boringbread.item.ItemCoin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.EntityLivingBase;

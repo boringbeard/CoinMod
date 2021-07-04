@@ -1,7 +1,7 @@
-package com.boringbread.common.item;
+package com.boringbread.item;
 
-import com.boringbread.common.CoinMod;
-import com.boringbread.common.Utils;
+import com.boringbread.init.CoinMod;
+import com.boringbread.util.Utils;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-import static com.boringbread.common.CreativeTabCoinMod.creativeTabCoinMod;
+import static com.boringbread.creativetab.CreativeTabCoinMod.creativeTabCoinMod;
 
 public class ItemCoin extends Item
 {

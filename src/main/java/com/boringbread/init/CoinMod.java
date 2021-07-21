@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 public class CoinMod {
     public static final String MOD_ID = "coinmod";
     public static final String NAME = "Boring Coin Mod";
-    public static final String VERSION = "0.0.1";
+    public static final String VERSION = "0.0.2";
 
     @Instance(CoinMod.MOD_ID)
     public static CoinMod instance;

@@ -1,5 +1,6 @@
 package com.boringbread.creativetab;
 
+import com.boringbread.init.CoinItems;
 import com.boringbread.item.ItemCoin;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ public class CreativeTabCoinMod extends CreativeTabs{
     @SideOnly(Side.CLIENT)
     @Override
     public ItemStack getTabIconItem(){
-        return new ItemStack(ItemCoin.INSTANCE);
+        return new ItemStack(CoinItems.COIN_BASIC);
     }
 
     public static void preInitCommon(){

@@ -10,7 +10,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
-    public void preInit() {
+    public void preInit()
+    {
         CreativeTabCoinMod.preInitCommon();
     }
 
@@ -33,6 +34,6 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
-        event.getRegistry().register(ItemCoin.INSTANCE);
+        CoinItems.registerItems(event);
     }
 }

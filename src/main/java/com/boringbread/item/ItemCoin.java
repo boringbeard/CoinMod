@@ -2,7 +2,6 @@ package com.boringbread.item;
 
 import com.boringbread.init.CoinMod;
 import com.boringbread.util.Utils;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
@@ -10,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -20,17 +18,20 @@ import static com.boringbread.creativetab.CreativeTabCoinMod.creativeTabCoinMod;
 
 public class ItemCoin extends Item
 {
-    public static final ItemCoin INSTANCE = new ItemCoin();
+    public final String name;
+    private final int successRate;
+    private final int chargeUpTicks;
+    private final int flippingDuration;
 
-    private static final String NAME = "coin_basic";
-    private static final int SUCCESS_RATE = 50;
-    private static final int CHARGE_UP_TICKS = 10;
-    private static final int FLIPPING_DURATION = 19;
-
-    public ItemCoin()
+    public ItemCoin(String name, int successRate, int chargeUpTicks, int flippingDuration)
     {
-        setRegistryName(NAME);
-        setUnlocalizedName(CoinMod.MOD_ID + "_" + NAME);
+        this.name = name;
+        this.successRate = successRate;
+        this.chargeUpTicks = chargeUpTicks;
+        this.flippingDuration = flippingDuration;
+
+        setRegistryName(this.name);
+        setUnlocalizedName(CoinMod.MOD_ID + "_" + this.name);
         setCreativeTab(creativeTabCoinMod);
 
         this.addPropertyOverride(new ResourceLocation("coinmod:donefraction"), new IItemPropertyGetter() {
@@ -46,7 +47,7 @@ public class ItemCoin extends Item
 
                 if(!isAnimating(entityIn, stack)) return RESTING_INDEX;
 
-                return Utils.getTagCompoundSafe(stack).getInteger("timer") / (float) FLIPPING_DURATION;
+                return Utils.getTagCompoundSafe(stack).getInteger("timer") / (float) ItemCoin.this.flippingDuration;
             }
         });
 
@@ -99,13 +100,13 @@ public class ItemCoin extends Item
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
-        if(entityLiving.isSneaking() && !isAnimating(entityLiving, stack) && stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount() > CHARGE_UP_TICKS)
+        if(entityLiving.isSneaking() && !isAnimating(entityLiving, stack) && stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount() > chargeUpTicks)
         {
             if(!worldIn.isRemote)
             {
                 Utils.getTagCompoundSafe(stack).setBoolean("animating", true);
 
-                if (SUCCESS_RATE > Math.random() * 100)
+                if (successRate > Math.random() * 100)
                 {
                     Utils.getTagCompoundSafe(stack).setBoolean("isHeads", true);
                 }
@@ -120,20 +121,14 @@ public class ItemCoin extends Item
     @Override
     public int getMaxItemUseDuration(ItemStack stack) { return 100; }
 
-    public static int getChargeUpTicks()
+    public int getChargeUpTicks()
     {
-        return CHARGE_UP_TICKS;
+        return chargeUpTicks;
     }
 
-    public static int getFlippingDuration()
+    public int getFlippingDuration()
     {
-        return FLIPPING_DURATION;
-    }
-
-    public static void initModel()
-    {
-        ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation("coinmod:coin_basic", "inventory");
-        ModelLoader.setCustomModelResourceLocation(INSTANCE, 0, itemModelResourceLocation);
+        return flippingDuration;
     }
 
     public boolean isAnimating(EntityLivingBase entityIn, ItemStack stack)

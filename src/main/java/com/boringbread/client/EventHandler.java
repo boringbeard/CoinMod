@@ -30,9 +30,11 @@ public class EventHandler
 
         if(!(heldItem instanceof ItemCoin) || !((ItemCoin) heldItem).isAnimating(entity, stack) || entity.world.isRemote) return;
 
+        ItemCoin heldCoin = (ItemCoin) heldItem;
+
         Utils.getTagCompoundSafe(stack).setInteger("timer", Utils.getTagCompoundSafe(stack).getInteger("timer") + 1);
 
-        if(Utils.getTagCompoundSafe(stack).getInteger("timer") >= ItemCoin.getFlippingDuration())
+        if(Utils.getTagCompoundSafe(stack).getInteger("timer") >= heldCoin.getFlippingDuration())
         {
             Utils.getTagCompoundSafe(stack).removeTag("timer");
             Utils.getTagCompoundSafe(stack).removeTag("animating");
@@ -50,7 +52,9 @@ public class EventHandler
 
         if(!(heldItem instanceof ItemCoin)) return;
 
-        if(clientPlayer.isHandActive() || ((ItemCoin) heldItem).isAnimating(clientPlayer, stack))
+        ItemCoin heldCoin = (ItemCoin) heldItem;
+
+        if(clientPlayer.isHandActive() || heldCoin.isAnimating(clientPlayer, stack))
         {
             event.setCanceled(true);
             RenderPlayerHoldingCoin renderPlayerHoldingCoin = new RenderPlayerHoldingCoin(Minecraft.getMinecraft().getRenderManager(), smallArms);
@@ -75,11 +79,12 @@ public class EventHandler
             return;
         }
 
+        ItemCoin activeCoin = (ItemCoin) activeItem;
         final float totalChargeUpZoom = 0.15F;
-        final float zoomIncrement = totalChargeUpZoom / ItemCoin.getChargeUpTicks();
+        final float zoomIncrement = totalChargeUpZoom / activeCoin.getChargeUpTicks();
         int ticksInUse = activeItem.getMaxItemUseDuration(player.getActiveItemStack()) - player.getItemInUseCount();
 
-        if(ticksInUse < ItemCoin.getChargeUpTicks()) newFOV -= zoomIncrement;
+        if(ticksInUse < activeCoin.getChargeUpTicks()) newFOV -= zoomIncrement;
 
         event.setNewfov(event.getFov() + newFOV);
     }

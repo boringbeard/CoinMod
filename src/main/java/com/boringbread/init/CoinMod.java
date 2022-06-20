@@ -19,6 +19,8 @@ public class CoinMod {
     public static final String NAME = "Boring Coin Mod";
     public static final String VERSION = "0.0.2";
 
+    public static int entityID = 0;
+
     @Instance(CoinMod.MOD_ID)
     public static CoinMod instance;
 

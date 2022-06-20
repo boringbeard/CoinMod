@@ -10,12 +10,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CoinItems
 {
-    public static final ItemCoin COIN_BASIC = new ItemCoin("coin_basic", 50, 10, 20);
+    public static final ItemCoin COIN_BASIC = new ItemCoin("coin_basic", 50, 10);
+    public static final ItemCoin COIN_IRON = new ItemCoin("coin_iron", 35, 10);
 
     @SideOnly(Side.CLIENT)
     public static void initModels()
     {
         initModel(COIN_BASIC, COIN_BASIC.name);
+        initModel(COIN_IRON, COIN_IRON.name);
     }
 
     @SideOnly(Side.CLIENT)
@@ -28,5 +30,6 @@ public class CoinItems
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().register(COIN_BASIC);
+        event.getRegistry().register(COIN_IRON);
     }
 }

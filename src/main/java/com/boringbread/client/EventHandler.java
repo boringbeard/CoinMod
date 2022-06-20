@@ -4,11 +4,14 @@ import com.boringbread.util.Utils;
 import com.boringbread.item.ItemCoin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,50 +22,23 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Mod.EventBusSubscriber
 public class EventHandler
 {
+    @SideOnly(Side.CLIENT)
     private static float newFOV = 0.0F;
-
-    @SubscribeEvent
-    public static void onLivingUpdate(LivingUpdateEvent event)
-    {
-        EntityLivingBase entity = event.getEntityLiving();
-        ItemStack stack =  entity.getHeldItemMainhand();
-        Item heldItem = stack.getItem();
-
-        if(!(heldItem instanceof ItemCoin) || !((ItemCoin) heldItem).isAnimating(entity, stack) || entity.world.isRemote) return;
-
-        ItemCoin heldCoin = (ItemCoin) heldItem;
-
-        Utils.getTagCompoundSafe(stack).setInteger("timer", Utils.getTagCompoundSafe(stack).getInteger("timer") + 1);
-
-        if(Utils.getTagCompoundSafe(stack).getInteger("timer") >= heldCoin.getFlippingDuration())
-        {
-            Utils.getTagCompoundSafe(stack).removeTag("timer");
-            Utils.getTagCompoundSafe(stack).removeTag("animating");
-        }
-    }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void onRenderPlayerPre(RenderPlayerEvent.Pre event)
+    public static void onRenderLivingPre(RenderLivingEvent.Pre event)
     {
-        AbstractClientPlayer clientPlayer = (AbstractClientPlayer)event.getEntityPlayer();
-        ItemStack stack = clientPlayer.getHeldItemMainhand();
-        Item heldItem = stack.getItem();
-        boolean smallArms = (clientPlayer.getSkinType() == "slim");
+        if(event.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.getEntity();
+            ItemStack stack = player.getHeldItemMainhand();
+            Item heldItem = stack.getItem();
 
-        if(!(heldItem instanceof ItemCoin)) return;
-
-        ItemCoin heldCoin = (ItemCoin) heldItem;
-
-        if(clientPlayer.isHandActive() || heldCoin.isAnimating(clientPlayer, stack))
-        {
-            event.setCanceled(true);
-            RenderPlayerHoldingCoin renderPlayerHoldingCoin = new RenderPlayerHoldingCoin(Minecraft.getMinecraft().getRenderManager(), smallArms);
-            renderPlayerHoldingCoin.doRender(clientPlayer, event.getX(), event.getY(), event.getZ(), clientPlayer.rotationYaw, event.getPartialRenderTick());
-        }
-        else
-        {
-            event.setCanceled(false);
+            if(player.isHandActive() && heldItem instanceof ItemCoin)
+            {
+                ModelBiped model = (ModelBiped) event.getRenderer().getMainModel();
+                model.rightArmPose = ModelBiped.ArmPose.BOW_AND_ARROW;
+            }
         }
     }
 

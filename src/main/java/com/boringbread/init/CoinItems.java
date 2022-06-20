@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class CoinItems
 {
     public static final ItemCoin COIN_BASIC = new ItemCoin("coin_basic", 50, 10);
-    public static final ItemCoin COIN_IRON = new ItemCoin("coin_iron", 35, 10);
+    public static final ItemCoin COIN_IRON = new ItemCoin("coin_iron", 50, 10);
 
     @SideOnly(Side.CLIENT)
     public static void initModels()

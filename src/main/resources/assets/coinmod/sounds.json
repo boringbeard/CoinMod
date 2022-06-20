@@ -1,0 +1,7 @@
+{
+  "coin_flip_basic": {
+    "category": "player",
+    "subtitle": "coinmod.subtitle.coin_flip_basic",
+    "sounds": [ "coinmod:coin_flip_basic" ]
+  }
+}

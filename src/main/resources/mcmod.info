@@ -6,7 +6,7 @@
   "version": "${version}",
   "mcversion": "${mcversion}",
   "authorList": ["boringbread"],
-  "credits": "Everyone",
+  "credits": "Basic coin flip sound: 'Coin Flip' by bone666138 under CC 4.0 / trimmed and edited from original (https://freesound.org/people/bone666138/sounds/198877/)",
   "logoFile": "coinmod:textures/coin_front.png",
   "screenshots": [],
   "dependencies": []

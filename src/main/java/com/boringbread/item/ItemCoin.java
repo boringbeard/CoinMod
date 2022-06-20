@@ -2,6 +2,7 @@ package com.boringbread.item;
 
 import com.boringbread.entity.item.EntityItemCoin;
 import com.boringbread.init.CoinMod;
+import com.boringbread.init.CoinSounds;
 import com.boringbread.util.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +12,7 @@ import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,8 +43,8 @@ public class ItemCoin extends Item
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
-                final float DRAW_HEADS = 1.0F;
-                final float DRAW_TAILS = 2.0F;
+                final float DRAW_HEADS = 0.0F;
+                final float DRAW_TAILS = 1.0F;
 
                 return Utils.getTagCompoundSafe(stack).hasKey("isHeads") ? DRAW_HEADS : DRAW_TAILS;
             }
@@ -68,7 +70,7 @@ public class ItemCoin extends Item
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
-        if(entityLiving.isSneaking() && stack.getMaxItemUseDuration() - entityLiving.getItemInUseCount() > chargeUpTicks)
+        if(entityLiving.isSneaking())
         {
             if(!worldIn.isRemote)
             {
@@ -85,15 +87,20 @@ public class ItemCoin extends Item
 
                 EntityItemCoin coin = new EntityItemCoin(worldIn);
                 coin.setItem(flippedCoin);
-                coin.setPickupDelay(20);
+                coin.setDefaultPickupDelay();
                 coin.copyLocationAndAnglesFrom(entityLiving);
                 coin.posX += Math.sin( Math.toRadians(entityLiving.rotationYaw) ) * -0.75; //spawns coin in front of players face
                 coin.posZ += Math.cos( Math.toRadians(entityLiving.rotationYaw) ) * 0.75;
                 coin.posY += entityLiving.getEyeHeight() - 0.4;
+
+                int ticksInUse = getMaxItemUseDuration(stack) - timeLeft;
+                float power = (Math.min(ticksInUse, chargeUpTicks) / 15.0F) + 0.1F;
+
                 coin.motionX = entityLiving.motionX;
-                coin.motionY = entityLiving.motionY + 0.75F;
+                coin.motionY = entityLiving.motionY + power;
                 coin.motionZ = entityLiving.motionZ;
                 worldIn.spawnEntity(coin);
+                coin.playSound(CoinSounds.COIN_FLIP_BASIC, 1.0F, 1.0F);
             }
         }
     }

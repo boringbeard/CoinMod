@@ -25,66 +25,63 @@ public class RenderEntityItemCoin<E extends EntityItemCoin> extends RenderEntity
     @Override
     public void doRender(EntityItem entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
-        ItemStack stack = entity.getItem();
-
-        if (this.bindEntityTexture(entity))
+        if (!entity.onGround)
         {
-            this.renderManager.renderEngine.getTexture(getEntityTexture(entity)).setBlurMipmap(false, false);
-        }
+            ItemStack stack = entity.getItem();
 
-        GlStateManager.enableRescaleNormal();
-        GlStateManager.alphaFunc(516, 0.1F);
-        GlStateManager.enableBlend();
-        RenderHelper.enableStandardItemLighting();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.pushMatrix();
+            if (this.bindEntityTexture(entity))
+            {
+                this.renderManager.renderEngine.getTexture(getEntityTexture(entity)).setBlurMipmap(false, false);
+            }
 
-        IBakedModel model = itemRenderer.getItemModelWithOverrides(stack, entity.world, null);
+            GlStateManager.enableRescaleNormal();
+            GlStateManager.alphaFunc(516, 0.1F);
+            GlStateManager.enableBlend();
+            RenderHelper.enableStandardItemLighting();
+            GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+            GlStateManager.pushMatrix();
 
-        float f1 = shouldBob() ? MathHelper.sin(((float) entity.getAge() + entityYaw) / 10.0F + entity.hoverStart) * 0.1F + 0.1F : 0;
-        GlStateManager.translate((float)x, (float)y + f1 + 0.25F, (float)z);
+            IBakedModel model = itemRenderer.getItemModelWithOverrides(stack, entity.world, null);
 
-        if (this.renderManager.options != null)
-        {
-            float f3 = (((float) entity.getAge() + entityYaw) / 20.0F + entity.hoverStart) * (180F / (float) Math.PI);
-            GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
-        }
+            GlStateManager.translate((float) x, (float) y + 0.25F, (float) z);
 
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if (this.renderOutlines)
-        {
-            GlStateManager.enableColorMaterial();
-            GlStateManager.enableOutlineMode(this.getTeamColor(entity));
-        }
+            if (this.renderOutlines)
+            {
+                GlStateManager.enableColorMaterial();
+                GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+            }
 
-        GlStateManager.pushMatrix();
-        IBakedModel transformedModel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
+            GlStateManager.pushMatrix();
+            IBakedModel transformedModel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 
-        if(!entity.onGround)
-        {
-            float flip = ((float) entity.getAge() + partialTicks) * 45;
+            float flip = ((float) entity.getAge() + partialTicks) * 90;
             GlStateManager.rotate(flip, 1.0F, 0.0F, 0.0F);
+
+            this.itemRenderer.renderItem(stack, transformedModel);
+            GlStateManager.popMatrix();
+            GlStateManager.translate(0.0F, 0.0F, 0.09375F);
+
+            if (this.renderOutlines)
+            {
+                GlStateManager.disableOutlineMode();
+                GlStateManager.disableColorMaterial();
+            }
+
+            GlStateManager.popMatrix();
+            GlStateManager.disableRescaleNormal();
+            GlStateManager.disableBlend();
+            this.bindEntityTexture(entity);
+
+            if (!this.renderOutlines)
+            {
+                this.renderName(entity, x, y, z);
+            }
         }
-
-        this.itemRenderer.renderItem(stack, transformedModel);
-        GlStateManager.popMatrix();
-        GlStateManager.translate(0.0F, 0.0F, 0.09375F);
-
-        if (this.renderOutlines)
+        else
         {
-            GlStateManager.disableOutlineMode();
-            GlStateManager.disableColorMaterial();
-        }
-
-        GlStateManager.popMatrix();
-        GlStateManager.disableRescaleNormal();
-        GlStateManager.disableBlend();
-        this.bindEntityTexture(entity);
-
-        if (!this.renderOutlines)
-        {
-            this.renderName(entity, x, y, z);
+            super.doRender(entity, x, y, z, entityYaw, partialTicks);
         }
     }
 }

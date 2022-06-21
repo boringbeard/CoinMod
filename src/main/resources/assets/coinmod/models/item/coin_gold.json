@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
 
   "textures": {
-    "0": "coinmod:coin_back",
-    "1": "coinmod:coin_front",
-    "particle": "coinmod:coin_front"
+    "0": "coinmod:coin_gold_back",
+    "1": "coinmod:coin_gold_front",
+    "particle": "coinmod:coin_gold_front"
   },
   "elements": [
     {
@@ -141,7 +141,7 @@
       "predicate": {
         "coinmod:side": 1
       },
-      "model": "coinmod:item/coin_basic_back"
+      "model": "coinmod:item/coin_gold_back"
     }
   ]
 }

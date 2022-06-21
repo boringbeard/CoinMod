@@ -1,5 +1,5 @@
 {
-  "parent": "coinmod:item/coin_basic",
+  "parent": "coinmod:item/coin_gold",
 
   "textures": {
     "0": "coinmod:coin_iron_back",

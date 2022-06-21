@@ -6,11 +6,11 @@ import net.minecraftforge.event.RegistryEvent;
 
 public class CoinSounds
 {
-    public static final SoundEvent COIN_FLIP_BASIC = createSoundEvent("coin_flip_basic");
+    public static final SoundEvent COIN_FLIP_METAL = createSoundEvent("coin_flip_metal");
 
     public static void registerSoundEvents(RegistryEvent.Register<SoundEvent> event)
     {
-        event.getRegistry().register(COIN_FLIP_BASIC);
+        event.getRegistry().register(COIN_FLIP_METAL);
     }
 
     private static SoundEvent createSoundEvent(String name)

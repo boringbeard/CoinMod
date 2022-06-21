@@ -4,15 +4,12 @@ import com.boringbread.entity.item.EntityItemCoin;
 import com.boringbread.init.CoinMod;
 import com.boringbread.init.CoinSounds;
 import com.boringbread.util.Utils;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,7 +43,7 @@ public class ItemCoin extends Item
                 final float DRAW_HEADS = 0.0F;
                 final float DRAW_TAILS = 1.0F;
 
-                return Utils.getTagCompoundSafe(stack).hasKey("isHeads") ? DRAW_HEADS : DRAW_TAILS;
+                return Utils.getTagCompoundSafe(stack).hasKey("isTails") ? DRAW_TAILS : DRAW_HEADS;
             }
         });
     }
@@ -78,11 +75,11 @@ public class ItemCoin extends Item
 
                 if (successRate > Math.random() * 100)
                 {
-                    Utils.getTagCompoundSafe(flippedCoin).setBoolean("isHeads", true);
+                    Utils.getTagCompoundSafe(flippedCoin).setBoolean("isTails", true);
                 }
                 else
                 {
-                    Utils.getTagCompoundSafe(flippedCoin).removeTag("isHeads");
+                    Utils.getTagCompoundSafe(flippedCoin).removeTag("isTails");
                 }
 
                 EntityItemCoin coin = new EntityItemCoin(worldIn);
@@ -100,7 +97,7 @@ public class ItemCoin extends Item
                 coin.motionY = entityLiving.motionY + power;
                 coin.motionZ = entityLiving.motionZ;
                 worldIn.spawnEntity(coin);
-                coin.playSound(CoinSounds.COIN_FLIP_BASIC, 1.0F, 1.0F);
+                coin.playSound(CoinSounds.COIN_FLIP_METAL, 1.0F, 1.0F);
             }
         }
     }

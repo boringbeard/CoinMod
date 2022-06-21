@@ -40,8 +40,8 @@ public class RenderEntityItemCoin<E extends EntityItemCoin> extends RenderEntity
 
         IBakedModel model = itemRenderer.getItemModelWithOverrides(stack, entity.world, null);
 
-        GlStateManager.translate((float) x, (float) y, (float) z);
-
+        float translatedY = entity.onGround ? (float) y + entity.hoverStart / 40.0F : (float) y;
+        GlStateManager.translate((float) x, translatedY, (float) z);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         if (this.renderOutlines)

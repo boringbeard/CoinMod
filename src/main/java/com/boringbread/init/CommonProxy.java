@@ -30,7 +30,7 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
-
+        CoinBlocks.registerBlocks(event);
     }
 
     @SubscribeEvent

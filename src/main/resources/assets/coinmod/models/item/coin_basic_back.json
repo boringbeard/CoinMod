@@ -4,6 +4,6 @@
 	"textures": {
 		"0": "coinmod:coin_front",
 		"1": "coinmod:coin_back",
-		"particle": "coinmod:coin_back"
+		"particle": "coinmod:coin_front"
 	}
 }

@@ -51,8 +51,8 @@ public class RenderEntityItemCoin<E extends EntityItemCoin> extends RenderEntity
         }
 
         GlStateManager.pushMatrix();
-        GlStateManager.rotate(entityYaw, 0.0F, -1.0F, 0.0F);
         IBakedModel transformedModel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
+        GlStateManager.rotate(entityYaw, 0.0F, -1.0F, 0.0F);
 
         if(!entity.onGround)
         {

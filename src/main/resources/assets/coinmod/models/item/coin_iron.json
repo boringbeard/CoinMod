@@ -1,0 +1,18 @@
+{
+  "parent": "coinmod:item/coin_basic",
+
+  "textures": {
+    "0": "coinmod:coin_iron_back",
+    "1": "coinmod:coin_iron_front",
+    "particle": "coinmod:coin_iron_front"
+  },
+
+  "overrides": [
+    {
+      "predicate": {
+        "coinmod:side": 1
+      },
+      "model": "coinmod:item/coin_iron_back"
+    }
+  ]
+}

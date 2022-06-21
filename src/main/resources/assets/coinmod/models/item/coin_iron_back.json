@@ -1,0 +1,9 @@
+{
+  "parent": "coinmod:item/coin_basic",
+
+  "textures": {
+    "0": "coinmod:coin_iron_front",
+    "1": "coinmod:coin_iron_back",
+    "particle": "coinmod:coin_iron_front"
+  }
+}

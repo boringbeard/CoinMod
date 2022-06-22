@@ -23,11 +23,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-
-public class BlockCoinstructor extends BlockContainer
+public class BlockCoinstructor extends BlockHorizontal
 {
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public final String name = "coinstructor";
 
     public BlockCoinstructor()
@@ -63,9 +60,14 @@ public class BlockCoinstructor extends BlockContainer
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
-    @Nullable
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta)
+    public boolean hasTileEntity(IBlockState state)
+    {
+        return true;
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state)
     {
         return new TileEntityCoinstructor();
     }

@@ -1,4 +1,5 @@
 item.coinmod_coin_gold.name=Gold Coin
 item.coinmod_coin_iron.name=Iron Coin
+tile.coinmod_coinstructor.name=Coinstructor
 coinmod.subtitle.coin_flip_metal=Coin flips
 itemGroup.coinmod_creative_tab=Coin Mod

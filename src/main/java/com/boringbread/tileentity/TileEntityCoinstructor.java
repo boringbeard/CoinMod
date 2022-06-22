@@ -3,40 +3,54 @@ package com.boringbread.tileentity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.NonNullList;
 
-public class TileEntityCoinstructor extends TileEntityLockable
+public class TileEntityCoinstructor extends TileEntityLockable implements ITickable, ISidedInventory
 {
+    private NonNullList<ItemStack> itemStacks = NonNullList.<ItemStack>withSize(3, ItemStack.EMPTY);
 
     @Override
     public int getSizeInventory()
     {
-        return 0;
+        return this.itemStacks.size();
     }
 
     @Override
     public boolean isEmpty()
     {
-        return false;
+        for (ItemStack itemstack : this.itemStacks)
+        {
+            if (!itemstack.isEmpty())
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
     public ItemStack getStackInSlot(int index)
     {
-        return null;
+        return this.itemStacks.get(index);
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count)
     {
-        return null;
+        return ItemStackHelper.getAndSplit(this.itemStacks, index, count);
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index)
     {
-        return null;
+        return ItemStackHelper.getAndRemove(this.itemStacks, index);
     }
 
     @Override
@@ -121,5 +135,29 @@ public class TileEntityCoinstructor extends TileEntityLockable
     public boolean hasCustomName()
     {
         return false;
+    }
+
+    @Override
+    public int[] getSlotsForFace(EnumFacing side)
+    {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+    {
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+    {
+        return false;
+    }
+
+    @Override
+    public void update()
+    {
+
     }
 }

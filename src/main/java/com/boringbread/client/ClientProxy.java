@@ -2,6 +2,7 @@ package com.boringbread.client;
 
 import com.boringbread.client.renderer.entity.RenderEntityItemCoin;
 import com.boringbread.entity.item.EntityItemCoin;
+import com.boringbread.init.CoinBlocks;
 import com.boringbread.init.CoinItems;
 import com.boringbread.init.CommonProxy;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -31,5 +32,6 @@ public class ClientProxy extends CommonProxy
     public static void registerModels(ModelRegistryEvent event)
     {
         CoinItems.initModels();
+        CoinBlocks.initModels();
     }
 }

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "coinmod:coinstructor" },
+    "facing=east": { "model": "coinmod:coinstructor", "y": 90 },
+    "facing=south": { "model": "coinmod:coinstructor", "y": 180 },
+    "facing=west": { "model": "coinmod:coinstructor", "y": 270 }
+  }
+}

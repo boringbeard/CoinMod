@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+
+  "textures": {
+    "side": "coinmod:blocks/coinstructor_side",
+    "bottom": "blocks/furnace_top",
+    "top": "coinmod:blocks/coinstructor_top"
+  }
+}

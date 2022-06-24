@@ -1,27 +1,26 @@
 package com.boringbread.block;
 
-import com.boringbread.creativetab.CreativeTabCoinMod;
 import com.boringbread.init.CoinMod;
+import com.boringbread.network.CoinPacketHandler;
+import com.boringbread.network.MessageTileEntitySync;
 import com.boringbread.tileentity.TileEntityCoinstructor;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public class BlockCoinstructor extends BlockHorizontal
 {
@@ -29,22 +28,42 @@ public class BlockCoinstructor extends BlockHorizontal
 
     public BlockCoinstructor()
     {
-        super(Material.IRON);
+        super(Material.ROCK);
         this.setRegistryName(new ResourceLocation(CoinMod.MOD_ID, "coinstructor"));
         this.setUnlocalizedName(CoinMod.MOD_ID + "_" + "coinstructor");
-        this.setCreativeTab(CreativeTabCoinMod.creativeTabCoinMod);
+        this.setCreativeTab(CoinMod.creativeTabCoinMod);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.MODEL;
+        this.setLightOpacity(0);
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
+        if (worldIn.isRemote) return true;
+
+        TileEntity te = worldIn.getTileEntity(pos);
+
+        if(te instanceof TileEntityCoinstructor)
+        {
+            TileEntityCoinstructor tec = (TileEntityCoinstructor) te;
+            IItemHandler itemHandler = tec.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing);
+            EnumFacing blockDir = state.getValue(BlockHorizontal.FACING);
+
+            Vec3d hitPos = new Vec3d(hitX, 0, hitZ);
+            hitPos.rotateYaw(-blockDir.getHorizontalAngle());
+
+            int i = hitPos.x > 0.5 ? TileEntityCoinstructor.LEFT_SLOT : TileEntityCoinstructor.RIGHT_SLOT;
+
+            if(itemHandler.getStackInSlot(TileEntityCoinstructor.MIDDLE_SLOT).isEmpty() != playerIn.getHeldItem(hand).isEmpty())
+            {
+                i = TileEntityCoinstructor.MIDDLE_SLOT;
+            }
+
+            playerIn.setHeldItem(hand, playerIn.getHeldItem(hand).isEmpty() ? itemHandler.extractItem(i, itemHandler.getSlotLimit(i), false) : itemHandler.insertItem(i, playerIn.getHeldItem(hand), false)); // fix logic
+            CoinPacketHandler.NETWORK_WRAPPER.sendToAllTracking(new MessageTileEntitySync(tec.getUpdateTag()), new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 0));
+            return true;
+        }
+
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
@@ -74,11 +93,15 @@ public class BlockCoinstructor extends BlockHorizontal
 
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+        TileEntity te = worldIn.getTileEntity(pos);
 
-        if (tileentity instanceof TileEntityFurnace)
+        if (te instanceof TileEntityCoinstructor)
         {
-            InventoryHelper.dropInventoryItems(worldIn, pos, (TileEntityFurnace)tileentity);
+            TileEntityCoinstructor tec = (TileEntityCoinstructor) te;
+            for (int i = 0; i < tec.getItemStackHandler().getSlots(); i++)
+            {
+                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tec.getItemStackHandler().getStackInSlot(i));
+            }
             worldIn.updateComparatorOutputLevel(pos, this);
         }
 
@@ -88,5 +111,11 @@ public class BlockCoinstructor extends BlockHorizontal
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
     }
 }

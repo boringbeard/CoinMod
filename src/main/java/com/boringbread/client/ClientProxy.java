@@ -1,11 +1,14 @@
 package com.boringbread.client;
 
 import com.boringbread.client.renderer.entity.RenderEntityItemCoin;
+import com.boringbread.client.renderer.tileentity.TileEntityCoinstructorRenderer;
 import com.boringbread.entity.item.EntityItemCoin;
 import com.boringbread.init.CoinBlocks;
 import com.boringbread.init.CoinItems;
 import com.boringbread.init.IProxy;
+import com.boringbread.tileentity.TileEntityCoinstructor;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -18,6 +21,7 @@ public class ClientProxy implements IProxy
     public void preInit()
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityItemCoin.class, RenderEntityItemCoin::new);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCoinstructor.class, new TileEntityCoinstructorRenderer());
     }
 
     @Override

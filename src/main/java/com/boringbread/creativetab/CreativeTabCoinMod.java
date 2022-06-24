@@ -7,8 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class CreativeTabCoinMod extends CreativeTabs{
-    public static CreativeTabCoinMod creativeTabCoinMod;
-
     public CreativeTabCoinMod(String label){
         super(label);
     }
@@ -17,9 +15,5 @@ public class CreativeTabCoinMod extends CreativeTabs{
     @Override
     public ItemStack getTabIconItem(){
         return new ItemStack(CoinItems.COIN_GOLD);
-    }
-
-    public static void preInitCommon(){
-        creativeTabCoinMod = new CreativeTabCoinMod("coinmod_creative_tab");
     }
 }

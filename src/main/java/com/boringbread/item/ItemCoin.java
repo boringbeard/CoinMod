@@ -16,8 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-import static com.boringbread.creativetab.CreativeTabCoinMod.creativeTabCoinMod;
-
 public class ItemCoin extends Item
 {
     public final String name;
@@ -32,7 +30,7 @@ public class ItemCoin extends Item
 
         setRegistryName(this.name);
         setUnlocalizedName(CoinMod.MOD_ID + "_" + this.name);
-        setCreativeTab(creativeTabCoinMod);
+        setCreativeTab(CoinMod.creativeTabCoinMod);
 
         this.addPropertyOverride(new ResourceLocation("coinmod:side"), new IItemPropertyGetter()
         {

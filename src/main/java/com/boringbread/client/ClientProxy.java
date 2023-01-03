@@ -5,7 +5,10 @@ import com.boringbread.client.renderer.tileentity.TileEntityCoinstructorRenderer
 import com.boringbread.entity.item.EntityItemCoin;
 import com.boringbread.init.CoinBlocks;
 import com.boringbread.init.CoinItems;
+import com.boringbread.init.CoinMod;
 import com.boringbread.init.IProxy;
+import com.boringbread.network.CoinPacketHandler;
+import com.boringbread.network.MessageTileEntitySync;
 import com.boringbread.tileentity.TileEntityCoinstructor;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -22,6 +25,7 @@ public class ClientProxy implements IProxy
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityItemCoin.class, RenderEntityItemCoin::new);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCoinstructor.class, new TileEntityCoinstructorRenderer());
+        CoinPacketHandler.NETWORK_WRAPPER.registerMessage(MessageTileEntitySync.Handler.class, MessageTileEntitySync.class, CoinMod.packetID++, Side.CLIENT);
     }
 
     @Override

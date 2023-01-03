@@ -1,8 +1,6 @@
 package com.boringbread.init;
 
 import com.boringbread.creativetab.CreativeTabCoinMod;
-import com.boringbread.network.CoinPacketHandler;
-import com.boringbread.network.MessageTileEntitySync;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
@@ -16,7 +14,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
@@ -28,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 public class CoinMod {
     public static final String MOD_ID = "coinmod";
     public static final String NAME = "Boring Coin Mod";
-    public static final String VERSION = "0.0.2";
+    public static final String VERSION = "0.0.2.1";
 
     public static int entityID = 0;
     public static int packetID = 0;
@@ -49,7 +46,6 @@ public class CoinMod {
         logger = event.getModLog();
         proxy.preInit();
         creativeTabCoinMod = new CreativeTabCoinMod("coinmod_creative_tab");
-        CoinPacketHandler.NETWORK_WRAPPER.registerMessage(MessageTileEntitySync.Handler.class, MessageTileEntitySync.class, packetID++, Side.CLIENT);
     }
 
     @EventHandler

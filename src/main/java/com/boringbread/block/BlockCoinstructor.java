@@ -17,6 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -29,8 +30,8 @@ public class BlockCoinstructor extends BlockHorizontal
     public BlockCoinstructor()
     {
         super(Material.ROCK);
-        this.setRegistryName(new ResourceLocation(CoinMod.MOD_ID, "coinstructor"));
-        this.setUnlocalizedName(CoinMod.MOD_ID + "_" + "coinstructor");
+        this.setRegistryName(new ResourceLocation(CoinMod.MOD_ID, name));
+        this.setUnlocalizedName(CoinMod.MOD_ID + "_" + name);
         this.setCreativeTab(CoinMod.creativeTabCoinMod);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
         this.setLightOpacity(0);
@@ -59,12 +60,26 @@ public class BlockCoinstructor extends BlockHorizontal
                 i = TileEntityCoinstructor.MIDDLE_SLOT;
             }
 
-            playerIn.setHeldItem(hand, playerIn.getHeldItem(hand).isEmpty() ? itemHandler.extractItem(i, itemHandler.getSlotLimit(i), false) : itemHandler.insertItem(i, playerIn.getHeldItem(hand), false)); // fix logic
+            playerIn.setHeldItem(hand, playerIn.getHeldItem(hand).isEmpty() ? itemHandler.extractItem(i, itemHandler.getStackInSlot(i).getCount(), false) : itemHandler.insertItem(i, playerIn.getHeldItem(hand), false)); // fix logic
             CoinPacketHandler.NETWORK_WRAPPER.sendToAllTracking(new MessageTileEntitySync(tec.getUpdateTag()), new NetworkRegistry.TargetPoint(worldIn.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 0));
             return true;
         }
 
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor)
+    {
+        if(neighbor.down().equals(pos)
+        && !world.getBlockState(neighbor).getBlock().isAir(world.getBlockState(neighbor), world, neighbor)) {
+            System.out.println("stamp");
+            TileEntity te = world.getTileEntity(pos);
+            if(te instanceof TileEntityCoinstructor){
+                ((TileEntityCoinstructor) te).stamp();
+            }
+        }
+        super.onNeighborChange(world, pos, neighbor);
     }
 
     @Override
@@ -111,11 +126,5 @@ public class BlockCoinstructor extends BlockHorizontal
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(FACING).getIndex();
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
     }
 }

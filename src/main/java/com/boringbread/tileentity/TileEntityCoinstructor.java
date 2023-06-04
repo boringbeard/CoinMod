@@ -1,5 +1,7 @@
 package com.boringbread.tileentity;
 
+import com.boringbread.init.CoinItems;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -92,7 +94,22 @@ public class TileEntityCoinstructor extends TileEntity implements ITickable, ICa
         return itemStackHandler;
     }
 
-    public void printContents()
-    {
+    public void stamp(){
+        System.out.println("testamp");
+        if (!itemStackHandler.getStackInSlot(MIDDLE_SLOT).isEmpty()){
+            itemStackHandler.setStackInSlot(MIDDLE_SLOT, recipeOutput(itemStackHandler));
+        }
+    }
+
+    public static ItemStack recipeOutput(ItemStackHandler handler) {
+        if (handler.getStackInSlot(MIDDLE_SLOT).getItem() == Items.GOLD_INGOT)
+        {
+            return new ItemStack(CoinItems.COIN_GOLD, 3);
+        }
+        if (handler.getStackInSlot(MIDDLE_SLOT).getItem() == Items.IRON_INGOT)
+        {
+            return new ItemStack(CoinItems.COIN_IRON, 3);
+        }
+        return handler.getStackInSlot(MIDDLE_SLOT);
     }
 }
